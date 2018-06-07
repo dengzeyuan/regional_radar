@@ -1,6 +1,6 @@
 <template>
 <div class="radra">
-  <!-- 日期联动组件（宁家鲜生项目里） -->
+  <!-- 日期联动组件 -->
   <!-- <curvspreDate class = 'topmgn' @change="datachange" :single="true"/> -->
   <div class="svgbg" v-loading="loading">
     <svg ref="svgs" :width="svgwidths" :height="svgheight"></svg>
@@ -65,7 +65,7 @@ export default {
     },
     //雷达图分区的子类元素加载完毕，回调事件
     clickrada: function(datatype) {
-      alert("初始化点击扇形事件")
+      alert("点击区域为："+datatype.name)
       // this.graphelist = srvicedataRada(this.timedata, this, datatype);
     },
     //画柱形图
@@ -108,91 +108,7 @@ export default {
 
       myChart.setOption(option);
     },
-    // 线图
-    drawline(data) {
-      // 基于准备好的dom，初始化echarts实例
-      let myChart = this.$echarts.init(document.getElementById(data.id));
-      // 绘制图表
-      let option = {
-        color: ["#03a8e0", "#99cc01"],
-        tooltip: {
-          trigger: "axis",
-          axisPointer: {
-            type: "shadow"
-          }
-        },
-        grid: {
-          left: "3%",
-          right: "4%",
-          bottom: "3%",
-          containLabel: true
-        },
-        xAxis: {
-          type: "category",
-          boundaryGap: false,
-          data: data.xAxis
-        },
-        yAxis: {
-          type: "value"
-        },
-        series: [
-          {
-            name: "当周",
-            type: "line",
-            data: data.dataCurrentWeek
-          }
-        ]
-      };
-      myChart.setOption(option);
-    },
-    // 仪表盘
-    drawpie(data, ley) {
-      // debugger
-      // 基于准备好的dom，初始化echarts实例
-      let myChart = this.$echarts.init(document.getElementById(data.id));
-      // 绘制图表
-      let option = {
-        tooltip: {
-          formatter: "{a} <br/>{b} : {c}%"
-        },
-        grid: {
-          left: "3%",
-          right: "4%",
-          bottom: "3%",
-          containLabel: true
-        },
-        series: [
-          {
-              splitNumber:5,
-            radius: '80%',
-            axisLine: {
-              // 坐标轴线
-              lineStyle: {
-                // 属性lineStyle控制线条样式
-                width: 10
-              }
-            },
-            title: {
-              fontWeight: "bolder",
-              fontSize: 12,
-              fontStyle: "italic"
-            },
-            pointer: {
-              length: "60%",
-              width: "4"
-            },
-            startAngle: 180,
-            endAngle: 0,
-            max: data.max,
-            // name: data.title,
-            type: "gauge",
-            detail: { formatter: data.dataCurrentWeek[0] },
-            data: [{ value: data.dataCurrentWeek[0] }]
-          }
-        ]
-      };
-      myChart.setOption(option);
-    }
+   
   }
 };
 </script>
