@@ -150,7 +150,7 @@ export default function drawRadar(time, that) {
                           "value": 80
                       },
                       {
-                          "name": "预测促销重点商品销售额",
+                          "name": "预测商品销售额",
                           "rangeMid": 1000,
                           "rangeMin": 0,
                           "rangeMax": 2000,
@@ -196,18 +196,18 @@ export default function drawRadar(time, that) {
                       }
                   ]
               },
-              {
-                  "name": "员工类",
-                  "items": [
-                      {
-                          "name": "员工人数",
-                          "rangeMid": 90,
-                          "rangeMin": 60,
-                          "rangeMax": 120,
-                          "value": 100
-                      }
-                  ]
-              },
+              // {
+              //     "name": "员工类",
+              //     "items": [
+              //         {
+              //             "name": "员工人数",
+              //             "rangeMid": 90,
+              //             "rangeMin": 60,
+              //             "rangeMax": 120,
+              //             "value": 100
+              //         }
+              //     ]
+              // },
               {
                   "name": "用户类",
                   "items": [
@@ -344,29 +344,13 @@ export default function drawRadar(time, that) {
         .append("text")
         .attr("x", 0)
         .attr("y", 0)
-        .attr("transform", function () {
-          // console.log(number)
-          // if (vindex == 0) {
-          // return "translate(15 -10) rotate(" + (+((ends-starts)/2))*onedeg +" 0,0)";
-          // }
-          // if (vindex == 1) {
-            // return "translate(10 10) rotate(" + (starts + ((ends - starts) / 2)) * onedeg + " 0,0)";
-          // }
-          // if (vindex == 2) {
-          //   return "translate(-15,90)";
-          // }
-          // if (vindex == 3) {
-          //   return "translate(-60,-30) rotate(20 0,0)";
-          // }
-          // if (vindex == 4) {
-          //   return "translate(-60,10) rotate(-10 0,0)";
-          // }
-          // if (vindex == 5) {
-          //   return "translate(-30,40) rotate(-45 0,0)";
-          // }
-        })
+        .attr("dx","15")
+        .attr("dy","10")
         .text(function () {
           return data.type[vindex].name;
+        })
+        .attr("transform", function () {
+          return "translate(0 0) rotate("+((starts+((ends-starts)/2))*onedeg-110)+" 0,0)";
         })
         .attr("font-size", "12px");
 
@@ -382,8 +366,9 @@ export default function drawRadar(time, that) {
           return d.y;
         })
         .text(function (d) {
-          return d.rangeMin;
+          return d.rangeMin>999?d.rangeMin/1000+"k":d.rangeMin;
         })
+        .attr("transform","translate(-5,5)")
         .style("font-size", "12px");
 
       main //中环刻度
@@ -400,6 +385,7 @@ export default function drawRadar(time, that) {
         .text(function (d) {
           return d.rangeMid>999?d.rangeMid/1000+"k":d.rangeMid;
         })
+        .attr("transform","translate(-5,5)")
         .style("font-size", "12px");
       main //外环刻度
         .selectAll(".textouter")
@@ -418,6 +404,7 @@ export default function drawRadar(time, that) {
         .text(function (d) {
           return d.rangeMax>999?d.rangeMax/1000+"k":d.rangeMax;
         })
+        .attr("transform","translate(-5,5)")
         .style("font-size", "12px");
 
       // 计算文字标签坐标
@@ -436,49 +423,17 @@ export default function drawRadar(time, that) {
         .attr("y", function (d) {
           return d.y;
         })
+        .attr("dx","10")
+        .attr("dy","10")
         .text(function (d, i) {
           return type.items[i].name;
         })
         // .attr("stroke","#666")
         .attr("stroke-width", "1px")
         .attr("font-size", "12px")
-        // .attr("transform", function (d, i) {
-        //   return "rotate(30 " + d.x + "," + d.y + ")";
-        // })
-        // .attr("transform", function (d, i) {
-          // if (vindex == 0) {
-          //   if (i < 5) {
-          //     return "rotate(30 " + d.x + "," + d.y + ")";
-          //   } else {
-          //     return "rotate(-30 " + d.x + "," + d.y + ")";
-          //   }
-          // }
-          // if (vindex == 1) {
-          //   return "translate(-10,0) rotate(-20 " + d.x + "," + d.y + ")";
-          // }
-          // if (vindex == 2) {
-          //   return "translate(-10,0) rotate(0 " + d.x + "," + d.y + ")";
-          // }
-          // if (vindex == 3) {
-          //   if (i == 0) {
-          //     return "translate(-60,20) rotate(-20 " + d.x + "," + d.y + ")";
-          //   } else {
-          //     return "translate(-30,20) rotate(-30 " + d.x + "," + d.y + ")";
-          //   }
-          // }
-          // if (vindex == 4) {
-          //   return "translate(-30,50) rotate(-60 " + d.x + "," + d.y + ")";
-          // }
-          // if (vindex == 5) {
-          //   if (i == 0) {
-          //     return "translate(-10,0) rotate(80 " + d.x + "," + d.y + ")";
-          //   }
-          //   if (i == 3) {
-          //     return "translate(-10,0) rotate(30 " + d.x + "," + d.y + ")";
-          //   }
-          //   return "translate(-10,0) rotate(70 " + d.x + "," + d.y + ")";
-          // }
-        // });
+        .attr("transform", function (d, i) {
+            return "translate(0 0) rotate("+((starts+((ends-starts)/2))*onedeg-90)+" "+d.x+","+d.y+")"
+        })
 
       valuepoint(type,vindex);   //实际值坐标计算
 
