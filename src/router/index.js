@@ -21,19 +21,12 @@ export default new Router({
           path: '/second',
           name: 'second',
           component: resolve => require(['../pages/radarD3/second.vue'], resolve),
-          // children: [
-          //   {
-          //     path: 'secondlist',
-          //     name: '第二页',
-          //     component: Table
-          //   }
-          // ]
         },
-        // {
-        //   path: '/three',
-        //   name: 'three',
-        //   component: resolve => require(['../pages/foldToggle/index.vue'], resolve),
-        // },
+        {
+          path: '/three',
+          name: 'three',
+          component: resolve => require(['../pages/radarD3/three.vue'], resolve),
+        },
       ]
     }
   ]

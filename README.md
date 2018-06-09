@@ -1,10 +1,13 @@
-# region_radar
+# regional_radar
 
 > A Vue.js project
 
 项目里 router配置为：<index="/index">echarts 展示的是基于echarts未完成的分区雷达图。
 水平有限没能实现echarts版本的分区雷达图，如果哪位大佬有实现的办法请赐教。
-qq:1033432257
+
+> qq:1033432257
+> 代码里包含注释解释
+
 
 ## Build Setup
 

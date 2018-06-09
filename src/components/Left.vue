@@ -8,6 +8,7 @@
           <!-- <template slot="title">分区域雷达图</template> -->
           <el-menu-item index="/index">echarts</el-menu-item>
           <el-menu-item index="/second">d3</el-menu-item>
+          <el-menu-item index="/three">需求原型</el-menu-item>
         </el-menu-item-group>
       </el-submenu>
     </el-menu>
